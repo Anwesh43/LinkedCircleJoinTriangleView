@@ -196,4 +196,26 @@ class CircleJoinTriangleView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : CircleJoinTriangleView) {
+
+        private val animator : Animator = Animator(view)
+        private val cjt : CircleJoinTriangle = CircleJoinTriangle(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            cjt.draw(canvas, paint)
+            animator.animate {
+                cjt.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            cjt.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
