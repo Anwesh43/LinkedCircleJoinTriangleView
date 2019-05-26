@@ -219,4 +219,13 @@ class CircleJoinTriangleView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CircleJoinTriangleView {
+            val view : CircleJoinTriangleView = CircleJoinTriangleView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
