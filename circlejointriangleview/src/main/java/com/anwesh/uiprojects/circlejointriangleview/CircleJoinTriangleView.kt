@@ -21,6 +21,8 @@ val strokeFactor : Int = 90
 val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#311B92")
 val backColor : Int = Color.parseColor("#BDBDBD")
+val rotDeg : Float = 180f
+val delay : Long = 20
 
 fun Int.inverse() : Float = 1f / this
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
@@ -53,7 +55,7 @@ fun Canvas.drawCJTNode(i : Int, scale : Float, paint : Paint) {
     paint.style = Paint.Style.STROKE
     save()
     translate(w / 2, gap * (i + 1))
-    rotate(90f * sc2)
+    rotate(rotDeg * sc2)
     drawCircle(0f, 0f, size, paint)
     for (j in 0..(lines -1)) {
         save()
@@ -108,7 +110,7 @@ class CircleJoinTriangleView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
@@ -225,7 +227,7 @@ class CircleJoinTriangleView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : CircleJoinTriangleView {
             val view : CircleJoinTriangleView = CircleJoinTriangleView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
